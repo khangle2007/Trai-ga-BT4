@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +47,19 @@ public class InsertCode extends AppCompatActivity {
                     startActivity(intent);
                 }
             }
+        });
+
+        editText.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                if (event.getRawX() >= (editText.getRight() - editText.getCompoundDrawables()[2].getBounds().width())) {
+
+                    editText.setText("");
+                    return true;
+                }
+            }
+
+            return false;
         });
 
         TextView textView2 = findViewById(R.id.textView5);
